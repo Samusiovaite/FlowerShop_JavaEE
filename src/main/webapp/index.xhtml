@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+>
+<h:head>
+    <link rel="stylesheet" href="style.css"></link>
+    <h1>Sveiki atvykę į gėlių parduotuvę!</h1>
+</h:head>
+<h:body>
+    <h2>Vartotojai:</h2>
+    <p>Čia matomas užsiregistravusių vartotojų sąrašas.
+       Paspaudus ant vartotojo vardo bus galima pamatyti
+       vartojo jau sukurtus užsakymus, arba sukurti naują :)</p>
+    <ol>
+        <ui:repeat value="#{users.allUsers}" var="user">
+            <li><h:link value="#{user.name} #{user.surname}" outcome="orders?userId=#{user.id}" /></li>
+        </ui:repeat>
+    </ol>
+    <h2>Produktai:</h2>
+    <p>Čia matomas gelių esančių mūsų parduotuvėje sąrašas. Šias gėles vartotojas gali
+       įsidėti į savo pirkinių krepšelį :)</p>
+    <p>Paspaudus mygtyką ištrinti - ištrinama prekė iš sąrašo ir iš visų užsakymų, kuriuose
+        ji buvo pridėta. </p>
+    <h:form>
+        <ui:repeat value="#{products.allProducts}" var="product" varStatus="status">
+            <div class="product-item">
+                <span> #{status.index + 1}. #{product.name} (#{product.price}€)</span>
+                <h:commandButton value="Ištrinti" actionListener="#{products.deleteProduct(product)}" styleClass="deleteButton" action="index?faces-redirect=true" >
+                    <f:ajax execute="@this" render="@form" />
+                </h:commandButton>
+            </div>
+        </ui:repeat>
+    </h:form>
+    <p>Žemiau esančiose formose galite pridėti naujų duomenų :) </p>
+    <h:form>
+        <hr></hr>
+        <h3>Pridėti naują vartotoją: </h3>
+        <h:outputText value="Vardas: " styleClass="output-label"/>
+        <h:inputText value="#{users.userToCreate.name}" required="true" styleClass="output-label"/>
+        <br></br>
+        <br></br>
+        <h:outputText value="Pavardė: " styleClass="output-label" />
+        <h:inputText value="#{users.userToCreate.surname}" required="true" />
+        <br></br>
+        <br></br>
+        <h:outputText value="El.Paštas: " styleClass="output-label" />
+        <h:inputText value="#{users.userToCreate.email}" required="true" />
+        <br></br>
+        <br></br>
+        <h:commandButton value="Pridėti vartotoją" actionListener="#{users.createUser}" action="index?faces-redirect=true"
+                         styleClass="command-button"/>
+        <hr></hr>
+    </h:form>
+    <h:form>
+        <hr></hr>
+        <h3>Pridėti naują gėlę į mūsų gėlių asortimentą: </h3>
+        <h:outputText value="Pavadinimas: "/>
+        <h:inputText value="#{products.productToCreate.name}" required="true" />
+        <br></br>
+        <br></br>
+        <h:outputText value="Kaina: "/>
+        <h:inputText value="#{products.productToCreate.price}" required="true" />
+        <br></br>
+        <br></br>
+        <h:commandButton value="Pridėti produktą" actionListener="#{products.createProduct}" action="index?faces-redirect=true"/>
+        <hr></hr>
+    </h:form>
+</h:body>
+</html>
+

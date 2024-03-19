@@ -1,0 +1,97 @@
+/* General body styling */
+body {
+    font-family: "Book Antiqua";
+    margin: 20px;
+    padding: 0;
+    background-color: #FFE6E6;
+}
+
+h1{
+    text-align: center;
+}
+
+h2, h3 {
+    color: #333;
+}
+
+h5 {
+    color: #333333;
+}
+
+/* Styling for links */
+a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+ol {
+    background-color: #E1AFD1;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+li {
+    margin: 10px 0;
+    color: #000000;
+}
+
+
+/* Form styling */
+form {
+    background-color: #E1AFD1;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+/* Target input type=text for h:inputText */
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #FFE6E6;
+}
+
+/* Target input type=submit and button for h:commandButton */
+input[type="submit"], button {
+    background-color: #7469B6;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block; /* if you want to make it block level */
+    margin: 10px 0;
+}
+
+input[type="submit"]:hover, button:hover {
+    background-color: #7469B6;
+}
+
+/* Horizontal rule styling */
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+
+.deleteButton {
+    margin-left: auto !important; /* nustatome atstumą tarp prekės ir mygtuko */
+}
+
+.product-item {
+    /*margin-bottom: 10px; !* nustatome tarpą tarp prekių, jei reikia *!*/
+    display: flex;
+    justify-content: space-between; /* Sukuria tarpą tarp elemento turinio ir mygtuko */
+    align-items: center; /* Centruoja elementus vertikaliai */
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head>
+    <link rel="stylesheet" href="styleMyBatis.css"></link>
+    <h1>Sveiki atvykę į gėlių parduotuvę!</h1>
+    <p>Čia duomenys užkraunami naudojant MyBatis :)</p>
+</h:head>
+<h:body>
+    <h2>Vartotojai:</h2>
+    <p>Čia matomas užsiregistravusių vartotojų sąrašas.
+        Paspaudus ant vartotojo vardo bus galima pamatyti
+        vartojo jau sukurtus užsakymus, arba sukurti naują :)</p>
+    <ol>
+        <ui:repeat value="#{usersMyBatis.allUsers}" var="user">
+            <li><h:link value="#{user.name}" outcome="/orders?userId=#{user.id}" /></li>
+        </ui:repeat>
+    </ol>
+    <h2>Produktai:</h2>
+    <p>Čia matomas gelių esančių mūsų parduotuvėje sąrašas. Šias gėles vartotojas gali
+        įsidėti į savo pirkinių krepšelį :)</p>
+    <ol>
+        <ui:repeat value="#{productsMyBatis.allProducts}" var="product">
+            <li>#{product.name} (#{product.price}€)</li>
+        </ui:repeat>
+    </ol>
+    <p>Žemiau esančiose formose galite pridėti naujų duomenų :) </p>
+    <h:form>
+        <hr></hr>
+        <h3>Pridėti naują vartotoją: </h3>
+        <h:outputText value="Vardas: "/>
+        <h:inputText value="#{usersMyBatis.userToCreate.name}" required="true" />
+        <br></br>
+        <br></br>
+        <h:outputText value="Pavardė: " styleClass="output-label" />
+        <h:inputText value="#{users.userToCreate.surname}" required="true" />
+        <br></br>
+        <br></br>
+        <h:outputText value="El.Paštas:  "/>
+        <h:inputText value="#{usersMyBatis.userToCreate.email}" required="true" />
+        <br></br>
+        <br></br>
+        <h:commandButton value="Pridėti vartotoją" action="#{usersMyBatis.createUser}"/>
+        <hr></hr>
+    </h:form>
+    <h:form>
+        <h3>Pridėti naują gėlę į mūsų gėlių asortimentą: </h3>
+        <h:outputText value="Pavadinimas: "/>
+        <h:inputText value="#{productsMyBatis.productToCreate.name}" required="true" />
+        <br></br>
+        <br></br>
+        <h:outputText value="Kaina: "/>
+        <h:inputText value="#{productsMyBatis.productToCreate.price}" required="true" />
+        <br></br>
+        <br></br>
+        <h:commandButton value="Pridėti produktą" action="#{productsMyBatis.createProduct}"/>
+        <hr></hr>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head>
+    <link rel="stylesheet" href="style.css"></link>
+    <h1>Sveiki atvykę į gėlių parduotuvę!</h1>
+</h:head>
+<h:body>
+    <h2>Užsakymas ##{updateOrderDetails.order.id}</h2>
+    <h4>Užsakymo data: (#{updateOrderDetails.order.orderedAt})</h4>
+    <h4>Pirkėjas: #{updateOrderDetails.order.user.name} #{updateOrderDetails.order.user.surname}</h4>
+
+    <h2>Produktų sąrašas:</h2>
+    <ol>
+        <ui:repeat value="#{updateOrderDetails.order.products}" var="product">
+            <li>#{product.name} (#{product.price}€)</li>
+        </ui:repeat>
+    </ol>
+    <h2>Galutinė užsakymo kaina: #{updateOrderDetails.order.price}€</h2>
+    <br></br>
+    <h:link outcome="index" value="Gįžti į pagrindinį puslapį"/>
+</h:body>
+</html>
