@@ -38,6 +38,8 @@ public class User implements Serializable {
     @Column(name = "EMAIL")
     private String email;
 
+    //cascade nurodo, kad visi veiksmai turi vyti kartu su susietais objektais
+    // orphanRemoval - nurodo, kad šalinant išsitrintu susieti objektai
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserOrder> orders = new ArrayList<>();
 

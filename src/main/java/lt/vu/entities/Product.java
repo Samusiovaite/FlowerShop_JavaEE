@@ -30,6 +30,7 @@ public class Product {
     @Column(name = "PRICE")
     private Double price;
 
+    // EAGER - entity yra užkraunamas
     @ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
     private List<UserOrder> orders = new ArrayList<>();
 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tomee>
-    <!-- see http://tomee.apache.org/containers-and-resources.html -->
-    <!-- see http://tomee.apache.org/datasource-config.html -->
+<!--     see http://tomee.apache.org/containers-and-resources.html-->
+<!--     see http://tomee.apache.org/datasource-config.html-->
 
     <!-- H2 Database -->
+    <!--Konfigūracija, kuri skirta aplikacijai prisijungti prie DB-->
     <Resource id="PskLab1DataSource" type="DataSource">
         JdbcDriver = org.h2.Driver
         JdbcUrl = jdbc:h2:~/h2database/PskLab1DB;AUTO_SERVER=TRUE;

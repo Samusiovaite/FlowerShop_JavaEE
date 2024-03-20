@@ -9,6 +9,9 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import java.io.IOException;
 
+// Kodas yra CDI(java EE standarto) valdomas java objektas, kuris skirtas
+// kurti ir tiekti SqlSessionFactory objektą, kuris yra būtinas, kad būtų
+// galima susieti MyBatis ir Jaba duomenis.
 @ApplicationScoped
 public class MyBatisResources {
 

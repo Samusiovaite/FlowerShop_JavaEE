@@ -2,20 +2,28 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--MyBatis konfigūracija, naudojama susieti Java Objektus su DB
+naudojant XML arba mapper failus-->
 <configuration>
     <typeAliases>
+        <!-- Nurodomos Java klases -->
         <typeAlias type="lt.vu.mybatis.model.User" alias="User"/>
         <typeAlias type="lt.vu.mybatis.model.UserOrder" alias="UserOrder"/>
         <typeAlias type="lt.vu.mybatis.model.Product" alias="Product"/>
     </typeAliases>
+    <!-- Nurodoma aplinka -->
     <environments default="development">
         <environment id="development">
+            <!--Nurodoma, kad transakcijos valdybas bus paliktas API(JTA)-->
             <transactionManager type="MANAGED"/>
+            <!-- naudojamas Java Naming and Directory interface šaltinis (datasource),
+            kuris naudojamas prisijungti prie duomenų bazes-->
             <dataSource type="JNDI">
                 <property name="data_source" value="PskLab1DataSource"/>
             </dataSource>
         </environment>
     </environments>
+    <!--Nurodomi mappinimo failai, kurie apibrežia SQL užklausas-->
     <mappers>
         <mapper resource="mybatis.xml/UserMapper.xml"/>
         <mapper resource="mybatis.xml/ProductMapper.xml"/>

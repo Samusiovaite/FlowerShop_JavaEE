@@ -1,3 +1,4 @@
+<!--DB konfigūracija-->
 <datasources>
     <datasource jndi-name="PskLab1DataSource" pool-name="PskLab1DataSource">
         <driver>h2</driver>

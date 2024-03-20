@@ -47,6 +47,11 @@ public class OrdersForUser implements Serializable {
     @Getter @Setter
     private List<Integer> selectedProducts = new ArrayList<>();
 
+    // Anotacija, kuri rodo, kad metodas turi būti iškviečiamas iš kart po to
+    // kai yra sukurta klasė ir inicijuoti visi klasės laukai
+    // - gaunami parametrai, kurie buvo perduoti per HTTP Užklausą, kurią
+    // apdoroja Javaserver Faces JSF karkasas
+    // gaunamas userId ir priskiriamas laukui user
     @PostConstruct
     public void init() {
         Map<String, String> requestParameters =

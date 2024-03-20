@@ -28,7 +28,9 @@ public class UsersDAO {
     public User findOne(Integer id) {
         return em.find(User.class, id);
     }
-
+    // Patikrinama, ar vartotojas yra priskirtas prie dabartines sesijos,
+    // Jei ne, prijungiamas naudojant merge metodą, kad pakeitimai būtų
+    // sinchronizuoti su DB. Ir tuomet pašalinamas vartotojas
     public void remove(User user) {
         em.remove(em.contains(user) ? user : em.merge(user));
     }

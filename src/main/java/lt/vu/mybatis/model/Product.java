@@ -1,5 +1,9 @@
 package lt.vu.mybatis.model;
 
+// MyBatis sugeneruotas kodas, kuris apibrėžia 'Product' klasę. Kiekvienas laukas atitinka
+// duomenų bazės stulpelį, o kiekvienas metodas yra susijęs su konkrečiu stulpeliu,
+// leidžiantis nustatyti jo reikšmę arba gauti jo reikšmę.
+
 public class Product {
     /**
      *

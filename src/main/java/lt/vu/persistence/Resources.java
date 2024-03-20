@@ -10,6 +10,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.SynchronizationType;
 
+// Klase, kuri atsakinga už EntityManager objektų kūrią su JPA ir CDI
+// Suteikia funkcionalumą valdyti em objektus, gautus HTTP užklausos gyvavimo
+// metu. Užtikrina, kad objektai bus sunaikinti, kai tampa nebereikalingais.
 @ApplicationScoped
 public class Resources {
 

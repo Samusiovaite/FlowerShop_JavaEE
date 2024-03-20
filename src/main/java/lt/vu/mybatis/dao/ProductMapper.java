@@ -4,6 +4,13 @@ import java.util.List;
 import lt.vu.mybatis.model.Product;
 import org.mybatis.cdi.Mapper;
 
+// MyBatis DAO (data Access Object)
+// MyBatis - duomenų susiejimo karkasas, kuris suteikia paprastą būdą atlikti
+// duomenų bazės užklausas.  Sugeneruotas kodas skirtas nurodyti duomenų bazės operacijas,
+// susijusias su prekių objektais. Kiekvienas metodas atitinka tam tikrą CRUD operaciją.
+// Visi šie metodai suteikia patogią sasają, kuri leidžia lengvai valdyti duomenų bazės
+// operacijas be tiesioginio SQL rašymo.
+
 @Mapper
 public interface ProductMapper {
     /**

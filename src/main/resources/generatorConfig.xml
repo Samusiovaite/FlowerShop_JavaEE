@@ -3,20 +3,26 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
+<!--XML kodas, skirtas generuoti MyBatis mappinimo failus ir Java objektus iš esamos
+DB schemos-->
 <generatorConfiguration>
     <context id="PskLab1DB" targetRuntime="MyBatis3Simple">
+        <!--Nurodomas prisijungimas prie DB-->
         <jdbcConnection driverClass="org.h2.Driver"
                         connectionURL="jdbc:h2:~/h2database/PskLab1DB;AUTO_SERVER=TRUE"
                         userId="sa"
                         password="sa">
         </jdbcConnection>
-
+        <!--nurodomas tikslinis paketas ir projektas kuriame bus sugeneruoti Java
+        modeliai atitinkantus DB lentelių struktūrą. -->
         <javaModelGenerator targetPackage="lt.vu.mybatis.model" targetProject="MAVEN" />
-
+        <!--nurodomas tikslinis paketas ir projektas kuriame bus sugeneruoti MyBatis
+        XML žemėlapiai aprašantys SQL užklausas -->
         <sqlMapGenerator targetPackage="lt.vu.mybatis.xml" targetProject="MAVEN" />
+        <!--nurodoma, kur bus sugeneruoti Java DAO (duomenų prieigos objektai) Pagal MyBatis XML žemėlapius. -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="lt.vu.mybatis.dao" targetProject="MAVEN" />
 
-
+        <!-- aprašoma kiekviena lentelė duomenų bazėje, kurios pagrindu bus generuojamas kodas. -->
         <table schema="public" tableName="product">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
         </table>

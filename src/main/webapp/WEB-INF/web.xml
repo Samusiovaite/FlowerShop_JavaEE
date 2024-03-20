@@ -2,22 +2,27 @@
         "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
+<!--Web Applikacijos konfigūracijos failas-->
 <web-app>
   <display-name>Psk lab1 application</display-name>
   <context-param>
+    <!-- Nurodoma, kad projektas vystomas, kūriamas  -->
     <param-name>javax.faces.PROJECT_STAGE</param-name>
     <param-value>Development</param-value>
   </context-param>
   <servlet>
+    <!-- Klasė, skirta apdoroti HTTP užklausas   -->
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
+    <!-- Nurodo, kokias URL adresų schemas turetų apdoroti servletas -->
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
+    <!-- Nurodomas pagrindinis puslapis   -->
     <welcome-file>index.xhtml</welcome-file>
   </welcome-file-list>
 </web-app>

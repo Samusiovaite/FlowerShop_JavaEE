@@ -5,10 +5,12 @@ import lt.vu.entities.UserOrder;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-
+// Klase, kuri atsakinga už komunikaciją su DB
 @ApplicationScoped
 public class OrdersDAO {
-
+    // anotacija naudojama įteprti EntityManager objektą į
+    // ProductDAO klasę. EntityManager yra JPA sąsaja, skirta
+    // valdyti CRUD operacijas su entitetais duomenų bazėje.
     @Inject
     private EntityManager em;
 
