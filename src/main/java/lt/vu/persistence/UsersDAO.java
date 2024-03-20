@@ -28,4 +28,8 @@ public class UsersDAO {
     public User findOne(Integer id) {
         return em.find(User.class, id);
     }
+
+    public void remove(User user) {
+        em.remove(em.contains(user) ? user : em.merge(user));
+    }
 }

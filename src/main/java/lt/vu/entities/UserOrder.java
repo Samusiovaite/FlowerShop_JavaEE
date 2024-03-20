@@ -29,7 +29,11 @@ public class UserOrder {
     private Date orderedAt;
 
     @ManyToMany
-    @JoinTable(name="ORDER_PRODUCTS")
+    @JoinTable(
+            name = "ORDER_PRODUCT",
+            joinColumns = @JoinColumn(name = "ORDER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID")
+    )
     private List<Product> products = new ArrayList<>();
 
     @ManyToOne

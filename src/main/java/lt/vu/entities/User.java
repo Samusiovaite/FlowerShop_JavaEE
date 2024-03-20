@@ -38,7 +38,7 @@ public class User implements Serializable {
     @Column(name = "EMAIL")
     private String email;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserOrder> orders = new ArrayList<>();
 
     @Override

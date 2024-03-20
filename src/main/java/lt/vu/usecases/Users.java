@@ -36,4 +36,13 @@ public class Users {
     private void loadAllUsers(){
         this.allUsers = usersDAO.loadAll();
     }
+
+    @Transactional
+    public void deleteUser(Integer userId) {
+        User user = usersDAO.findOne(userId);
+        if (user != null) {
+            usersDAO.remove(user);
+            loadAllUsers();
+        }
+    }
 }

@@ -13,11 +13,17 @@
     <p>Čia matomas užsiregistravusių vartotojų sąrašas.
        Paspaudus ant vartotojo vardo bus galima pamatyti
        vartojo jau sukurtus užsakymus, arba sukurti naują :)</p>
-    <ol>
-        <ui:repeat value="#{users.allUsers}" var="user">
-            <li><h:link value="#{user.name} #{user.surname}" outcome="orders?userId=#{user.id}" /></li>
+    <h:form>
+        <ui:repeat value="#{users.allUsers}" var="user" varStatus="loop">
+            <div class="product-item">
+                <span>#{loop.index + 1}. </span>
+                <h:link value="#{user.name} #{user.surname}" outcome="orders?userId=#{user.id}" />
+                <h:commandButton value="Ištrinti" actionListener="#{users.deleteUser(user.id)}" styleClass="deleteButton" action="index?faces-redirect=true">
+                    <f:ajax execute="@this" render="@form" />
+                </h:commandButton>
+            </div>
         </ui:repeat>
-    </ol>
+    </h:form>
     <h2>Produktai:</h2>
     <p>Čia matomas gelių esančių mūsų parduotuvėje sąrašas. Šias gėles vartotojas gali
        įsidėti į savo pirkinių krepšelį :)</p>
