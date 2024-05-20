@@ -8,6 +8,7 @@ import lt.vu.usecases.OrdersForUser;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import java.util.List;
 
 @ApplicationScoped
@@ -44,10 +45,30 @@ public class ProductsDAO {
 
     private Double pricesAmount(List<Product> products) {
         // Skaičiuojame visų produktų kainų sumą
-        return products.stream().mapToDouble(Product::getPrice).sum();
+        double sum = 0.0;
+        for (Product product : products) {
+            sum += product.getPrice();
+        }
+        return sum;
     }
 
     public Product findOne(Integer id) {
         return em.find(Product.class, id);
+    }
+
+    public Product update(Product product){
+        return em.merge(product);
+    }
+
+    public List<Product> loadByIds(List<Integer> ids) {
+        return em.createQuery("SELECT p FROM Product p WHERE p.id IN :ids", Product.class)
+                .setParameter("ids", ids)
+                .getResultList();
+    }
+
+    public List<Product> findByName(String name) {
+        return em.createQuery("SELECT p FROM Product p WHERE p.name LIKE :name", Product.class)
+                .setParameter("name", "%" + name + "%")
+                .getResultList();
     }
 }

@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.inject.Named;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -30,6 +31,13 @@ public class Product {
     @Column(name = "PRICE")
     private Double price;
 
+    @Column(name = "BARCODE")
+    private String barcode;
+
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    public Integer version;
+
     // EAGER - entity yra užkraunamas
     @ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
     private List<UserOrder> orders = new ArrayList<>();
@@ -41,4 +49,10 @@ public class Product {
         Product product = (Product) o;
         return Objects.equals(name, product.name);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+
 }

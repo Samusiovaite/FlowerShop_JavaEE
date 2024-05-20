@@ -3,6 +3,7 @@ package lt.vu.usecases;
 
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.entities.Product;
 import lt.vu.entities.UserOrder;
 import lt.vu.persistence.OrdersDAO;
 
@@ -14,6 +15,8 @@ import javax.inject.Named;
 import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @ViewScoped
@@ -26,6 +29,7 @@ public class UpdateOrderDetails implements Serializable {
     @Inject
     private OrdersDAO ordersDAO;
 
+    @Inject
     private OrdersForUser ordersForUser;
 
     @PostConstruct
@@ -47,6 +51,19 @@ public class UpdateOrderDetails implements Serializable {
         return "orders.xhtml?userId=" + this.order.getUser().getId() + "&faces-redirect=true";
     }
 
+    public Double calculateTotal(List<Product> products) {
+        List<Double> pricesList = new ArrayList<>();
+        for (Product product : products) {
+            pricesList.add(product.getPrice());
+        }
+
+        Double sum = 0.0;
+        for (Double price : pricesList) {
+            sum += price;
+        }
+
+        return Double.parseDouble(String.format("%.2f", sum));
+    }
 
 
 }

@@ -5,6 +5,7 @@ import lt.vu.entities.User;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.Order;
 import java.util.List;
 
 @ApplicationScoped
@@ -34,4 +35,8 @@ public class UsersDAO {
     public void remove(User user) {
         em.remove(em.contains(user) ? user : em.merge(user));
     }
+
+
+
+
 }

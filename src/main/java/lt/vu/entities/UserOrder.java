@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "USER_ORDER")
 @Getter @Setter
-public class UserOrder {
+public class UserOrder implements Serializable {
 
     public UserOrder(){
 
@@ -39,6 +40,19 @@ public class UserOrder {
     @ManyToOne
     @JoinColumn(name="USER_ID")
     private User user;
+
+    public void removeProduct(Product product) {
+        if (product != null && products.contains(product)) {
+            products.remove(product);
+        }
+    }
+
+    public void addProduct(Product product) {
+        if (product != null && !products.contains(product)) {
+            products.add(product);
+        }
+    }
+
 
     @Override
     public boolean equals(Object o) {

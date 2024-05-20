@@ -17,7 +17,8 @@
         <ui:repeat value="#{users.allUsers}" var="user" varStatus="loop">
             <div class="product-item">
                 <span>#{loop.index + 1}. </span>
-                <h:link value="#{user.name} #{user.surname}" outcome="orders?userId=#{user.id}" />
+                <h:link value="#{user.name}" outcome="orders?userId=#{user.id}" />
+<!--                <h:link value="Visų užsakytų užsakymų suma: (#{user.totalOrders}€)" outcome="orders?userId=#{user.id}" />-->
                 <h:commandButton value="Ištrinti" actionListener="#{users.deleteUser(user.id)}" styleClass="deleteButton" action="index?faces-redirect=true">
                     <f:ajax execute="@this" render="@form" />
                 </h:commandButton>
@@ -30,9 +31,11 @@
     <p>Paspaudus mygtyką ištrinti - ištrinama prekė iš sąrašo ir iš visų užsakymų, kuriuose
         ji buvo pridėta. </p>
     <h:form>
-        <ui:repeat value="#{products.allProducts}" var="product" varStatus="status">
+        <ui:repeat value="#{products.allProducts}" var="product" varStatus="loop">
             <div class="product-item">
-                <span> #{status.index + 1}. #{product.name} (#{product.price}€)</span>
+                <span>#{loop.index + 1}. </span>
+                <h:link value="#{product.name} (#{product.price}€)" outcome="product?productId=#{product.id}" />
+<!--                <span> #{status.index + 1}. #{product.name} (#{product.price}€)</span>-->
                 <h:commandButton value="Ištrinti" actionListener="#{products.deleteProduct(product)}" styleClass="deleteButton" action="index?faces-redirect=true" >
                     <f:ajax execute="@this" render="@form" />
                 </h:commandButton>
@@ -70,8 +73,43 @@
         <h:inputText value="#{products.productToCreate.price}" required="true" />
         <br></br>
         <br></br>
-        <h:commandButton value="Pridėti produktą" actionListener="#{products.createProduct}" action="index?faces-redirect=true"/>
+        <h:outputText value="Barkodas: "/>
+        <h:inputText value="#{products.productToCreate.barcode}" required="true"/>
+        <br></br>
+        <br></br>
+        <h:commandButton value="Pridėti produktą" actionListener="#{products.createProduct}" />
         <hr></hr>
+    </h:form>
+    <h:form>
+        <hr/>
+        <h3>Atnaujinti esamą gėlę: </h3>
+        <h:outputText value="Produkto ID: "/>
+        <h:inputText id="productId" value="#{products.productToUpdate.id}" required="true"/>
+        <h:message for="productId" style="color:red"/>
+        <h:commandButton value="Ieškoti" action="#{products.findProductById(products.productToUpdate.id)}"/>
+        <br/><br/>
+        <h:outputText value="Pavadinimas: "/>
+        <h:inputText id="productName" value="#{products.productToUpdate.name}" required="true"/>
+        <h:message for="productName" style="color:red"/>
+        <br/><br/>
+        <h:outputText value="Kaina: "/>
+        <h:inputText id="productPrice" value="#{products.productToUpdate.price}" required="true"/>
+        <h:message for="productPrice" style="color:red"/>
+        <br/><br/>
+        <h:outputText value="Barkodas: "/>
+        <h:inputText id="productBarcode" value="#{products.productToUpdate.barcode}" required="true"/>
+        <h:message for="productBarcode" style="color:red"/>
+        <br/><br/>
+
+        <h:commandButton value="Atnaujinti produktą" action="#{products.updateProduct}"/>
+        <hr/>
+    </h:form>
+
+    <h:form>
+        <h:outputText value="#{generateProductNumber.productsGenerationStatus}" />
+        <h:commandButton value="Generuoti barkodą" disabled="#{generateProductNumber.productGenerationRunning}" action="#{generateProductNumber.generateNewProductsNumber()}">
+            <f:param name="productId" value="#{products.productToUpdate.id}"/>
+        </h:commandButton>
     </h:form>
 </h:body>
 </html>

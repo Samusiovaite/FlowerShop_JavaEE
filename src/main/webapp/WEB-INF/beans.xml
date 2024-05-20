@@ -2,10 +2,20 @@
 <!--Reiktų pasirašyti kodą, kuris būtų naudojamas CDI(Contexts and
 Debendency Injection kontekste. Nurodyti, kad komponentai bus
 automatiškai aptinkami naudojant anotacijas: @RequestScope, @Named ir pan-->
-<beans
-        xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-                      http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
-        bean-discovery-mode="annotated">
+<beans xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+        http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
+       bean-discovery-mode="all">
+<!--        bean-discovery-mode="annotated">-->
+
+    <alternatives>
+        <class>lt.vu.alternatives.AltMessage</class>
+    </alternatives>
+    <interceptors>
+        <class>lt.vu.interceptors.MethodLogger</class>
+    </interceptors>
+    <decorators>
+        <class>lt.vu.decorators.DecoratorImpl</class>
+    </decorators>
 </beans>

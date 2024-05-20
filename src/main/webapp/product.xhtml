@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <link rel="stylesheet" href="style.css"/>
+    <title>Sveiki atvykę į VIP prekes!</title>
+</h:head>
+<h:body>
+    <h1>Sveiki atvykę į VIP prekes!</h1>
+    <h2>Products:</h2>
+    <ol>
+        <ui:repeat value="#{productUpdate.allProduct}" var="product">
+            <li>
+                <h:link value="#{product.name}" outcome="optimisticUpdate?productId=#{product.id}" />
+            </li>
+        </ui:repeat>
+    </ol>
+    <h2>Pridėti naują prekę:</h2>
+    <h:form>
+        <h:outputLabel for="name" value="Pavadinimas:"/>
+        <h:inputText id="name" value="#{productUpdate.productToCreate.name}" required="true" />
+        <br/>
+        <h:outputLabel for="price" value="Kaina:"/>
+        <h:inputText id="price" value="#{productUpdate.productToCreate.price}" required="true" />
+        <br/>
+        <h:outputLabel for="barcode" value="Barkodas:"/>
+        <h:inputText id="barcode" value="#{productUpdate.productToCreate.barcode}" required="true" />
+        <br/>
+        <h:commandButton value="Pridėti prekę" action="#{productUpdate.createProduct}"/>
+    </h:form>
+    <h:link outcome="index" value="Gįžti į pagrindinį puslapį"/>
+    <br/>
+</h:body>
+</html>

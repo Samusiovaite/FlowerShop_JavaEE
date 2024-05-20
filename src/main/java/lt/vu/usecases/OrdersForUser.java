@@ -6,8 +6,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.persistence.criteria.Order;
 import javax.transaction.Transactional;
+import java.io.Console;
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +24,6 @@ import lt.vu.persistence.ProductsDAO;
 import lt.vu.persistence.UsersDAO;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 @Model
 public class OrdersForUser implements Serializable {
@@ -62,7 +61,13 @@ public class OrdersForUser implements Serializable {
 
     @Transactional
     public void createOrder() {
-        List<Product> products = selectedProducts.stream().map(i -> productsDAO.findOne(i)).collect(Collectors.toList());
+        List<Product> products = new ArrayList<>();
+        for (Integer id : selectedProducts) {
+            Product product = productsDAO.findOne(id);
+            if (product != null) {
+                products.add(product);
+            }
+        }
         Double price = pricesAmount(products);
         orderToCreate.setPrice(price);
         orderToCreate.setProducts(products);
@@ -71,15 +76,15 @@ public class OrdersForUser implements Serializable {
         ordersDAO.persist(orderToCreate);
     }
 
-    private Double pricesAmount(List<Product> products) {
-        List<Double> pricesList = products.stream().map(i -> i.getPrice()).collect(Collectors.toList());
+    public Double pricesAmount(List<Product> products) {
         Double sum = 0.0;
-
-        for (Double i : pricesList)
-            sum = sum + i;
+        for (Product product : products) {
+            sum += product.getPrice();
+        }
 
         return Double.parseDouble(String.format("%.2f", sum));
     }
+
 
 
     public void foo(User user){

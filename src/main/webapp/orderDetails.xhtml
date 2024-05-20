@@ -16,10 +16,10 @@
     <h2>Produktų sąrašas:</h2>
     <ol>
         <ui:repeat value="#{updateOrderDetails.order.products}" var="product">
-            <li>#{product.name} (#{product.price}€)</li>
+            <li>#{product.name} (#{product.price}€) #{product.barcode}</li>
         </ui:repeat>
     </ol>
-    <h2>Galutinė užsakymo kaina: #{updateOrderDetails.order.price}€</h2>
+    <h2>Galutinė užsakymo kaina: #{updateOrderDetails.calculateTotal(updateOrderDetails.order.products)}€</h2>
     <br></br>
     <h:link outcome="index" value="Gįžti į pagrindinį puslapį"/>
 </h:body>
